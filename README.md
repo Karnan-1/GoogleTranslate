@@ -15,10 +15,18 @@ There are two options to toggle, which can be accessed by right clicking on the 
 
 ## Installing from a fresh terminal (macOS)
 
-Requires macOS and [Node.js](https://nodejs.org) (any reasonably current
-version — no native modules are required to build this app). If you don't
-have Node.js installed, either download it from nodejs.org or install it
-with Homebrew: `brew install node`.
+Requires macOS and **Node.js 20.19 or newer** (see `.nvmrc`; no native
+modules are required to build this app, but `electron-builder`'s dist
+tooling needs a Node version that recent enough to load its dependencies).
+If you use [nvm](https://github.com/nvm-sh/nvm):
+
+```bash
+nvm install
+nvm use
+```
+
+Otherwise download Node from nodejs.org or install it with Homebrew:
+`brew install node`.
 
 1. Clone the repository and enter it:
 
