@@ -13,7 +13,7 @@ There are two options to toggle, which can be accessed by right clicking on the 
 - __Remember languages:__ When enabled this option saves your last selected languages.
 - __Clear on blur:__ When enabled this option clears the input field when the application window is hidden.
 
-## Running from source (macOS, Terminal)
+## Installing from a fresh terminal (macOS)
 
 Requires macOS and [Node.js](https://nodejs.org) (any reasonably current
 version — no native modules are required to build this app). If you don't
@@ -33,6 +33,8 @@ with Homebrew: `brew install node`.
    npm install
    ```
 
+   This should complete cleanly with no native compile errors.
+
 3. Start the app:
 
    ```bash
@@ -47,23 +49,30 @@ with Homebrew: `brew install node`.
    Look for the Translate icon in the macOS menu bar (top-right of the
    screen) and click it, or press `Cmd+G`, to show the translator window.
 
-### Building a standalone app
+### Building a standalone .dmg
 
-To build a distributable `.dmg` instead of running from source:
+Building the installer must be done on macOS itself (it relies on macOS's
+`hdiutil`, which isn't available on other platforms):
 
 ```bash
 npm run dist
 ```
 
-The built `.dmg` will be in the `dist/` folder — open it and drag the app
-into Applications.
+The built `.dmg` will be in the `dist/` folder, e.g. `dist/Translator-1.0.2.dmg`.
 
-### Updating to the latest changes
+This build isn't code-signed or notarized (that requires a paid Apple
+Developer account), so macOS Gatekeeper will show an "unidentified
+developer" warning the first time the installed app is opened. To open it
+anyway: right-click the app in Applications → **Open** → confirm in the
+dialog, or go to System Settings → Privacy & Security → **Open Anyway**
+after the first blocked attempt. This is only needed once per install.
+
+### Updating an existing checkout
 
 From inside the project folder:
 
 ```bash
-git pull
+git pull origin main
 npm install
 npm start
 ```
