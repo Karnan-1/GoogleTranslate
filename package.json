@@ -10,6 +10,9 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "Goutham Shibulal",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "dependencies": {
     "electron-store": "^5.0.0",
     "electron-util": "^0.12.2"
