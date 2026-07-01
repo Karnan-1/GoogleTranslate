@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { Tray, Menu, globalShortcut } = require('electron');
+const { Tray, Menu, globalShortcut, app } = require('electron');
+const { is } = require('electron-util');
 const path = require('path');
 
 class TrayGenerator {
@@ -43,6 +44,14 @@ class TrayGenerator {
     }
   };
 
+  toggleLaunchAtStart = (checked) => {
+    this.store.set('launchAtStart', checked);
+
+    if (!is.development) {
+      app.setLoginItemSettings({ openAtLogin: checked });
+    }
+  }
+
   toggleShortcut = (event) => {
     this.store.set('useShortcut', event)
 
@@ -75,7 +84,7 @@ class TrayGenerator {
         label: 'Launch at startup',
         type: 'checkbox',
         checked: this.store.get('launchAtStart'),
-        click: (event) => this.store.set('launchAtStart', event.checked),
+        click: (event) => this.toggleLaunchAtStart(event.checked),
       },
       {
         label: 'Use CMD+G shortcut',
