@@ -69,11 +69,27 @@ npm run dist
 The built `.dmg` will be in the `dist/` folder, e.g. `dist/Translator-1.0.2.dmg`.
 
 This build isn't code-signed or notarized (that requires a paid Apple
-Developer account), so macOS Gatekeeper will show an "unidentified
-developer" warning the first time the installed app is opened. To open it
-anyway: right-click the app in Applications → **Open** → confirm in the
-dialog, or go to System Settings → Privacy & Security → **Open Anyway**
-after the first blocked attempt. This is only needed once per install.
+Developer account). Install it by opening the `.dmg` and dragging
+**Translator** into Applications:
+
+```bash
+open dist/Translator-1.0.2.dmg
+```
+
+On newer macOS, an unsigned app copied this way is quarantined by
+Gatekeeper and can fail to open at all, showing a plain "can't be opened"
+dialog with no bypass option (right-click → Open doesn't help here, unlike
+apps that are ad-hoc signed). Fix it by clearing the quarantine flag once,
+after installing to Applications:
+
+```bash
+xattr -cr /Applications/Translator.app
+open /Applications/Translator.app
+```
+
+This is only needed once per install — after that it opens normally from
+Applications, Spotlight, or Launchpad, independent of any terminal
+session.
 
 ### Updating an existing checkout
 
